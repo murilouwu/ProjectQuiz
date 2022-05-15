@@ -25,9 +25,9 @@
 			<form id="imgtr" class="formimg" method="post">
 		        <div class="container-fluid d-flex flex-column justify-content-center">
 		        	<button onclick="ocultar('imgtr','2')" class="buton btn btn-warning text-light"><strong>X</strong></button>
-		        	<label class="form-label text-light fw-bolder">Trocar imagem de perfil:</label>
-		        		<input type="url" name="link" class="form-control bg-dark text-light" minlength="5" placeholder="cole aqui o link da imagem" required>
-		        	<input type="submit" class="form-control bg-dark text-light" name="env001" value="ENVIAR">
+		        	<label class="form-label text-light fw-bolder">Change Profile Picture:</label>
+		        		<input type="url" name="link" class="form-control bg-dark text-light" minlength="5" placeholder="paste the image link here" required>
+		        	<input type="submit" class="form-control bg-dark text-light" name="env001" value="TO SEND">
 		        </div>
 		    </form>
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -42,19 +42,19 @@
 			                    <a class="nav-link text-warning linkcss" aria-current="page" href="index.html"><strong>♛</strong></a>
 			                </li>
 			                <li class="nav-item">
-			                	<a class="nav-link text-warning linkcss" aria-current="page" href="#"><strong>Raking</strong></a>
+			                	<a class="nav-link text-warning linkcss" aria-current="page" href="rank.php"><strong>Ranking</strong></a>
 			                </li>
 			                <li class="nav-item">
-			                	<a class="nav-link text-warning linkcss" aria-current="page" href="#"><strong>Jogar</strong></a>
+			                	<a class="nav-link text-warning linkcss" aria-current="page" href="jogos.php"><strong>Play</strong></a>
 			                </li>
 			                <li class="nav-item dropdown linkcss">
 			                    <a class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-			                        <strong>Conta</strong>
+			                        <strong>Account</strong>
 			                    </a>
 			                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" onclick="ocultar('senha','2')"><strong>Mudar Senha</strong></a></li>
-			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" href="index.html"><strong>Excluir conta</strong></a></li>
+			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" onclick="ocultar('senha','2')"><strong>Change Password</strong></a></li>
+			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" href="index.html"><strong>Delete Account</strong></a></li>
 			                    </ul>
 			                </li>
 			        	</ul>
@@ -65,14 +65,14 @@
 	            <div class="col-md-5 lg-5 mx-auto my-2">
 	                <img src="img/logo.png" class="imglink">
 	                <p class="lead fw-normal text-light">
-	                    Bem vindo <?php echo$_SESSION['name'];?>
+	                    Welcome <?php echo$_SESSION['name'];?>
 	                </p>
 	            </div>
 	            <div class="col-md-5 lg-5 mx-auto my-2">
 	            	<h1 class="fw-normal text-light"><strong>-Ranking-</strong></h1>
 	                <p class="lead fw-normal text-light">
-	                	possition:<br><?php echo "#".$_SESSION['rank'];?>;<br>
-	                	Pontuação:<br><?php echo $_SESSION['pontos']." pontos";?>;
+	                	Position:<br><?php echo "#".$_SESSION['rank'];?>;<br>
+	                	Punctuation:<br><?php echo $_SESSION['pontos']." Spots";?>;
 	                </p>
 	            </div>
 	        </div>
@@ -80,13 +80,13 @@
 		        <form id="senha" class="formimgA" method="post">
 		        	<div class="container-fluid d-flex flex-column justify-content-center">
 		        		<button onclick="ocultar('senha','2')" class="buton btn btn-warning text-light"><strong>X</strong></button>
-		        		<label class="form-label text-light fw-bolder">alterar</label>
+		        		<label class="form-label text-light fw-bolder">Change</label>
 
-		        		<label class="form-label text-light fw-bolder">Nome:</label>
-		        			<input type="text" name="nome" class="form-control bg-dark text-light" placeholder="opicional">
-		        		<label class="form-label text-light fw-bolder">Senha:</label>
+		        		<label class="form-label text-light fw-bolder">Name:</label>
+		        			<input type="text" name="nome" class="form-control bg-dark text-light" placeholder="optional">
+		        		<label class="form-label text-light fw-bolder">Password:</label>
 		        			<input type="text" name="senha" class="form-control bg-dark text-light">
-		        		<input type="submit" class="form-control bg-dark text-light" name="enviar" value="ENVIAR">
+		        		<input type="submit" class="form-control bg-dark text-light" name="enviar" value="TO SEND">
 		        	</div>
 		        </form>
 	        </div>
