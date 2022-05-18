@@ -71,12 +71,20 @@
 <?php
 	include('connect.php');
 		if(isset($_POST['enviar1'])){
-			$sql = 'INSERT INTO user (nome, email, senha) VALUES ("'.$_POST['nome'].'","'.$_POST['email'].'","'.$_POST['senha'].')';
-			$resultado = $con->query($sql);
-			if($resultado){
-				echo'<script>alert("cadastro feito");</script>';
+			$sql0 = 'SELECT * FROM user WHERE email = "'.$_POST['email'].'" AND senha ="'.$_POST['senha'].'"';
+			$res0 = $con->query($sql0);
+			
+			if($ver = 'a'){
+				$sql= 'INSERT INTO user (nome,email,senha) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'")';
+				$resultado = $con->query($sql);
+				if($resultado){
+					msg("cadastrado com sucesso!");
+					msg("ja pode entrar!");
+				}else{
+					msg("eror ao cadastrar.");
+				}
 			}else{
-				echo($resultado);
+				msg("User já existe");
 			}
 		}
 ?>

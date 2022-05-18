@@ -18,7 +18,7 @@
 			        <div class="d-flex">
 			            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			                <li class="nav-item">
-			                    <a class="nav-link text-warning linkcss" aria-current="page" href="index.html"><strong>♛</strong></a>
+			                    <a class="nav-link text-warning linkcss" aria-current="page" href="index.php"><strong>♛</strong></a>
 			                </li>
 			                <li class="nav-item">
 			                	<a class="nav-link text-warning linkcss" aria-current="page" href="pageUser.php"><strong>Perfil</strong></a>

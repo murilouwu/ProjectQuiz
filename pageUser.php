@@ -40,7 +40,7 @@
 			        <div class="d-flex">
 			            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			                <li class="nav-item">
-			                    <a class="nav-link text-warning linkcss" aria-current="page" href="index.html"><strong>♛</strong></a>
+			                    <a class="nav-link text-warning linkcss" aria-current="page" href="index.php"><strong>♛</strong></a>
 			                </li>
 			                <li class="nav-item">
 			                	<a class="nav-link text-warning linkcss" aria-current="page" href="rank.php"><strong>Ranking</strong></a>
@@ -55,7 +55,7 @@
 			                    </a>
 			                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
 			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" onclick="ocultar('senha','2')"><strong>Change Password</strong></a></li>
-			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" href="index.html"><strong>Delete Account</strong></a></li>
+			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" href="index.php"><strong>Delete Account</strong></a></li>
 			                    </ul>
 			                </li>
 			        	</ul>
