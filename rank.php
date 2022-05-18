@@ -33,13 +33,37 @@
 		    <div class="container d-flex flex-column justify-content-center">
 		    	<div class="d-flex flex-column justify-content-center text-center align-items-center p-md-3">
 		    		<h1 class="fw-normal text-light">Your Rank:</h1>
-		    		<div class="collumn container-fluid bg-dark rounded-pill p-md-2 border border-warning border-3">
+		    		<div class="collumn container-fluid bg-dark rounded-pill p-md-2 border border-success border-3">
 	        			<h2 class="text-light">User: Paulo</h2>
 	        			<h6 class="text-light">Position: 800</h6>
 	        		</div>
 	        		<h1 class="fw-normal text-light p-md-3">World Rank:</h1>
 		    	</div>
-		    	<div class="d-flex flex-column justify-content-center text-center align-items-center p-md-1 overflow-auto" style="height: 50vh;">
+		    	<div class="d-flex flex-column overflow-auto" style="height: 50vh;">
+	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-light border-3 text-center">
+	        			<h3 class="text-light">User: Carlos</h3>
+	        			<h6 class="text-light">Position: 1</h6>
+	        		</div><br>
+	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
+	        			<h3 class="text-light">User: Carlos</h3>
+	        			<h6 class="text-light">Position: 1</h6>
+	        		</div><br>
+	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
+	        			<h3 class="text-light">User: Carlos</h3>
+	        			<h6 class="text-light">Position: 1</h6>
+	        		</div><br>
+	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
+	        			<h3 class="text-light">User: Carlos</h3>
+	        			<h6 class="text-light">Position: 1</h6>
+	        		</div><br>
+	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
+	        			<h3 class="text-light">User: Carlos</h3>
+	        			<h6 class="text-light">Position: 1</h6>
+	        		</div><br>
+	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
+	        			<h3 class="text-light">User: Carlos</h3>
+	        			<h6 class="text-light">Position: 1</h6>
+	        		</div><br>
 	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
 	        			<h3 class="text-light">User: Carlos</h3>
 	        			<h6 class="text-light">Position: 1</h6>

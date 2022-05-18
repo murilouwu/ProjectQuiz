@@ -8,6 +8,7 @@ function ocultar(el, el2) {
       document.getElementById(el).style.display = 'flex';
       document.getElementById(el2).style.display = 'none';
     }
-  else
+  else{
     document.getElementById(el).style.display = 'none';
+  };
 };

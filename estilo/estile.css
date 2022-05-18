@@ -46,3 +46,27 @@ input[type=submit]{
 
 	margin-top: 6%;
 }
+.formimg{
+	display: none;
+	width: 15vw;
+	height: 20vh;
+	margin-top: 5vh;
+	margin-left: 23vw;
+	background-color: rgba(33, 37, 41, 0.6);
+	border-radius: 20px;
+	outline: solid 4px rgba(237, 164, 55, 1.0);
+	z-index: 10;
+	position: absolute;
+}
+.formimgA{
+	display: none;
+	width: 15vw;
+	height: 30vh;
+	margin-top: -60vh;
+	margin-left: 60vw;
+	background-color: rgba(33, 37, 41, 0.6);
+	border-radius: 20px;
+	outline: solid 4px rgba(237, 164, 55, 1.0);
+	z-index: 10;
+	position: absolute;
+}
