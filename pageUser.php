@@ -1,8 +1,6 @@
 <?php
 	session_start();
-	$_SESSION["name"] = "Paulo";
-	$_SESSION["img"] = "img/face.png";
-	$_SESSION["rank"] = "800";
+	$_SESSION["rank"] = "Below the top 100";
 	$_SESSION["pontos"] = "0";
 ?>
 <!DOCTYPE html>

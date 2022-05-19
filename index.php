@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,7 +48,7 @@
 		        		<label class="form-label text-light fw-bolder">Register</label>
 
 		        		<label class="form-label text-light fw-bolder">Name:</label>
-		        			<input type="text" name="nome" class="form-control bg-dark text-light">
+		        			<input type="text" name="nome" class="form-control bg-dark text-light" placeholder="Don't use the character (&)">
 		        		<label class="form-label text-light fw-bolder">Email:</label>
 		        			<input type="email" name="email" class="form-control bg-dark text-light">
 		        		<label class="form-label text-light fw-bolder">Password:</label>
@@ -57,8 +60,8 @@
 		        	<div class="container-fluid d-flex flex-column justify-content-center">
 		        		<label class="form-label text-light fw-bolder">Log in</label>
 
-		        		<label class="form-label text-light fw-bolder">Email:</label>
-		        			<input type="text" name="emaillog" class="form-control bg-dark text-light" minlength="2">
+		        		<label class="form-label text-light fw-bolder">Nome:</label>
+							<input type="text" name="nomelog" class="form-control bg-dark text-light" minlength="2">
 		        		<label class="form-label text-light fw-bolder">Password:</label>
 		        			<input type="text" name="senhalog" class="form-control bg-dark text-light" minlength="2">
 		        		<input type="submit" class="form-control bg-dark text-light" name="enviar2" value="TO SEND">
@@ -71,20 +74,52 @@
 <?php
 	include('connect.php');
 		if(isset($_POST['enviar1'])){
-			$sql0 = 'SELECT * FROM user WHERE email = "'.$_POST['email'].'" AND senha ="'.$_POST['senha'].'"';
-			$res0 = $con->query($sql0);
-			
-			if($ver = 'a'){
-				$sql= 'INSERT INTO user (nome,email,senha) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'")';
-				$resultado = $con->query($sql);
-				if($resultado){
-					msg("cadastrado com sucesso!");
-					msg("ja pode entrar!");
+			$nome = $_POST['nome'];
+			$char = "&";
+			$res = strripos($nome, $char);
+
+			if($res===false){
+				$ver = ver("&".$nome."&\n");
+
+				if($ver === 0){
+					$sql= 'INSERT INTO user (nome,email,senha,foto) VALUES ("'.$nome.'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png")';
+					$resultado = $con->query($sql);
+					if($resultado){
+						$resume = "&".$nome."&";
+						$file = fopen('listusers.txt', 'a+');
+							fwrite($file, $resume);
+							fclose($file);
+					}else{
+						msg("eror ao cadastrar.");
+					}
 				}else{
-					msg("eror ao cadastrar.");
+					msg("User já existe");
 				}
 			}else{
-				msg("User já existe");
+				msg("nome com o caractere não permetido");
 			}
 		}
+		if(isset($_POST['enviar2'])){
+			$sql = 'SELECT * FROM user WHERE nome = "'.$_POST['nomelog'].'" AND senha ="'.$_POST['senhalog'].'"';
+			$res = $con->query($sql);
+			if($res->num_rows > 0){
+				$user = $res->fetch_object();
+				$_SESSION['cd'] = $user->cd;
+				$_SESSION['name'] = $user->nome;
+				$_SESSION['senha'] = $user->senha;
+				$_SESSION['email'] = $user->email;
+				$_SESSION['img'] = $user->foto; 
+				vai('pageUser.php');
+			}else{
+				msg("USER OU SENHA INVALIDO");
+			}
+		}
+		function ver($var){
+			if(strpos(file_get_contents("listusers.txt"),$var) !== false) {
+				$res = 1;
+			}else{
+				$res = 0;
+			}
+			return $res;
+		};
 ?>

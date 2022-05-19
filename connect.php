@@ -9,6 +9,10 @@ if(!$con){
 }
 
 function msg($texto){
-    echo $texto;
+    echo '<script>alert("'.$texto.'");</script>';
+}
+function vai($var)
+{
+    echo '<script> window.location = "'.$var.'" </script>';
 }
 ?>
