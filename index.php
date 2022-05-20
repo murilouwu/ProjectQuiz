@@ -74,29 +74,16 @@
 <?php
 	include('connect.php');
 		if(isset($_POST['enviar1'])){
-			$nome = $_POST['nome'];
-			$char = "&";
-			$res = strripos($nome, $char);
-
-			if($res===false){
-				$ver = ver("&".$nome."&\n");
-
-				if($ver === 0){
-					$sql= 'INSERT INTO user (nome,email,senha,foto) VALUES ("'.$nome.'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png")';
-					$resultado = $con->query($sql);
-					if($resultado){
-						$resume = "&".$nome."&";
-						$file = fopen('listusers.txt', 'a+');
-							fwrite($file, $resume);
-							fclose($file);
-					}else{
-						msg("eror ao cadastrar.");
-					}
-				}else{
-					msg("User já existe");
+			$sql0 = 'SELECT * FROM user WHERE nome = "'.$_POST['nome'].'"';
+			$res = $con->query($sql0);
+			if($res->num_rows < 1){
+				$sql= 'INSERT INTO user (nome,email,senha,foto) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png")';
+				$resultado = $con->query($sql);
+				if(!$resultado){
+					msg("eror ao cadastrar.");
 				}
 			}else{
-				msg("nome com o caractere não permetido");
+				msg("User já existe");
 			}
 		}
 		if(isset($_POST['enviar2'])){
@@ -114,12 +101,4 @@
 				msg("USER OU SENHA INVALIDO");
 			}
 		}
-		function ver($var){
-			if(strpos(file_get_contents("listusers.txt"),$var) !== false) {
-				$res = 1;
-			}else{
-				$res = 0;
-			}
-			return $res;
-		};
 ?>

@@ -1,4 +1,5 @@
 <?php
+	include('connect.php');
 	session_start();
 	$_SESSION["rank"] = "Below the top 100";
 	$_SESSION["pontos"] = "0";
@@ -53,7 +54,7 @@
 			                    </a>
 			                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
 			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" onclick="ocultar('senha','2')"><strong>Change Password</strong></a></li>
-			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" href="index.php"><strong>Delete Account</strong></a></li>
+			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" onclick="excluir()"><strong>Delete Account</strong></a></li>
 			                    </ul>
 			                </li>
 			        	</ul>
@@ -91,4 +92,77 @@
 	        </div>
 		</div>
 	</body>
+	<script >
+		function excluir(){
+			var result ='<?php del(); ?>';
+			document.write(result);
+		}
+	</script>
 </html>
+<?php
+	if(isset($_POST['env001'])){
+		$cd = $_SESSION['cd'];
+		$img = $_POST['link'];
+
+		$sql = 'UPDATE user SET foto ="'.$img.'" WHERE cd ="'.$cd.'"';
+		$res = $con->query($sql);
+
+		$sql2 = 'SELECT * FROM user WHERE nome = "'.$_SESSION['name'].'" AND senha ="'.$_SESSION['senha'].'"';
+		$res2 = $con->query($sql2);
+
+		if($res2->num_rows > 0){
+			$user = $res2->fetch_object();
+			$_SESSION['img'] = $user->foto; 
+		}else{
+			msg("foto não aceita");
+		}
+	}
+	if(isset($_POST['enviar'])){
+		$cd = $_SESSION['cd'];
+		$name = $_POST['nome'];
+		$senha = $_POST['senha'];
+		if(!($_POST['nome']==="")){
+			$sql = 'UPDATE user SET nome ="'.$name.'" WHERE cd ="'.$cd.'"';
+			$res = $con->query($sql);
+
+			$sql2 = 'SELECT * FROM user WHERE cd ="'.$cd.'"';
+			$res2 = $con->query($sql2);
+
+			if($res2->num_rows > 0){
+				$user = $res2->fetch_object();
+				$_SESSION['name'] = $user->nome; 
+			}else{
+				msg("função negada");
+			}
+		}else{
+			$sql = 'UPDATE user SET nome ="'.$_SESSION['name'].'" WHERE cd ="'.$cd.'"';
+			$res = $con->query($sql);
+
+			$sql2 = 'SELECT * FROM user WHERE cd ="'.$cd.'"';
+			$res2 = $con->query($sql2);
+
+			if($res2->num_rows > 0){
+				$user = $res2->fetch_object();
+				$_SESSION['name'] = $user->nome; 
+			}else{
+				msg("função negada");
+			}
+		};
+		$sql = 'UPDATE user SET senha ="'.$senha.'" WHERE cd ="'.$cd.'"';
+		$res = $con->query($sql);
+
+		$sql2 = 'SELECT * FROM user WHERE cd ="'.$cd.'"';
+		$res2 = $con->query($sql2);
+
+		if($res2->num_rows > 0){
+			$user = $res2->fetch_object();
+			$_SESSION['senha'] = $user->senha; 
+		}else{
+			msg("função negada");
+		}
+	}
+	function del(){
+		$sql = 'DELETE FROM user WHERE cd ="'.$cd.'"';
+		vai('index.php');
+	}
+?>
