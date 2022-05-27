@@ -61,9 +61,9 @@
 		        		<label class="form-label text-light fw-bolder">Log in</label>
 
 		        		<label class="form-label text-light fw-bolder">Nome:</label>
-							<input type="text" name="nomelog" class="form-control bg-dark text-light" minlength="2">
+							<input type="text" name="nomelog" class="form-control bg-dark text-light">
 		        		<label class="form-label text-light fw-bolder">Password:</label>
-		        			<input type="text" name="senhalog" class="form-control bg-dark text-light" minlength="2">
+		        			<input type="text" name="senhalog" class="form-control bg-dark text-light">
 		        		<input type="submit" class="form-control bg-dark text-light" name="enviar2" value="TO SEND">
 		        	</div>
 		        </form>
@@ -77,7 +77,7 @@
 			$sql0 = 'SELECT * FROM user WHERE nome = "'.$_POST['nome'].'"';
 			$res = $con->query($sql0);
 			if($res->num_rows < 1){
-				$sql= 'INSERT INTO user (nome,email,senha,foto) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png")';
+				$sql= 'INSERT INTO user (nome,email,senha,foto,ponto,possicao) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png","0","0")';
 				$resultado = $con->query($sql);
 				if(!$resultado){
 					msg("eror ao cadastrar.");
@@ -95,7 +95,9 @@
 				$_SESSION['name'] = $user->nome;
 				$_SESSION['senha'] = $user->senha;
 				$_SESSION['email'] = $user->email;
-				$_SESSION['img'] = $user->foto; 
+				$_SESSION['img'] = $user->foto;
+				$_SESSION['pontos'] = $user->ponto;
+				$_SESSION['rank'] = $user->possicao; 
 				vai('pageUser.php');
 			}else{
 				msg("USER OU SENHA INVALIDO");

@@ -8,7 +8,7 @@ email VARCHAR(450),
 senha VARCHAR(200),
 foto VARCHAR(100),
 ponto INT,
-rank INT);
+possicao INT);
 
 CREATE TABLE categoria(
 cd INT PRIMARY KEY AUTO_INCREMENT,

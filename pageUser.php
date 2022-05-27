@@ -1,8 +1,6 @@
 <?php
 	include('connect.php');
 	session_start();
-	$_SESSION["rank"] = "Below the top 100";
-	$_SESSION["pontos"] = "0";
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,7 +52,7 @@
 			                    </a>
 			                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
 			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" onclick="ocultar('senha','2')"><strong>Change Password</strong></a></li>
-			                        <li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" onclick="excluir()"><strong>Delete Account</strong></a></li>
+									<li><a class="dropdown-item text-warning d-flex flex-column align-items-center linkcss" onclick="excluir()"><strong>Excuir Conta</strong></a></li>
 			                    </ul>
 			                </li>
 			        	</ul>
@@ -71,7 +69,7 @@
 	            <div class="col-md-5 lg-5 mx-auto my-2">
 	            	<h1 class="fw-normal text-light"><strong>-Ranking-</strong></h1>
 	                <p class="lead fw-normal text-light">
-	                	Position:<br><?php echo "#".$_SESSION['rank'];?>;<br>
+	                	Position:<br><?php echo "# ".$_SESSION['rank'];?>;<br>
 	                	Punctuation:<br><?php echo $_SESSION['pontos']." Spots";?>;
 	                </p>
 	            </div>
@@ -92,11 +90,10 @@
 	        </div>
 		</div>
 	</body>
-	<script >
+	<script>
 		function excluir(){
-			var result ='<?php del(); ?>';
-			document.write(result);
-		}
+			window.location = "ex.php"
+		} 
 	</script>
 </html>
 <?php
@@ -160,9 +157,5 @@
 		}else{
 			msg("função negada");
 		}
-	}
-	function del(){
-		$sql = 'DELETE FROM user WHERE cd ="'.$cd.'"';
-		vai('index.php');
 	}
 ?>
