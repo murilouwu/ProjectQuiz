@@ -1,6 +1,7 @@
 <?php
 	include('connect.php');
 	session_start();
+	Proteger();
 ?>
 <!DOCTYPE html>
 <html>
@@ -109,7 +110,8 @@
 
 		if($res2->num_rows > 0){
 			$user = $res2->fetch_object();
-			$_SESSION['img'] = $user->foto; 
+			$_SESSION['img'] = $user->foto;
+			vai("pageUser.php"); 
 		}else{
 			msg("foto não aceita");
 		}

@@ -45,7 +45,7 @@
 	            </div>
 	        </div>
 	        <div class="container-fluid d-flex justify-content-center margin">
-		        <form id="cadastro" class="cadastro" method="post">
+		        <form id="cadastro" class="cadastro" method="post" style="margin-top: -1vh;">
 		        	<div class="container-fluid d-flex flex-column justify-content-center">
 		        		<label class="form-label text-light fw-bolder">Register</label>
 
@@ -54,18 +54,18 @@
 		        		<label class="form-label text-light fw-bolder">Email:</label>
 		        			<input type="email" name="email" class="form-control bg-dark text-light">
 		        		<label class="form-label text-light fw-bolder">Password:</label>
-		        			<input type="text" name="senha" class="form-control bg-dark text-light">
+		        			<input type="password" name="senha" class="form-control bg-dark text-light" required>
 		        		<input type="submit" class="form-control bg-dark text-light" name="enviar1" value="TO SEND">
 		        	</div>
 		        </form>
-		        <form id="login" class="cadastro" method="post">
+		        <form id="login" class="cadastro" method="post" style="margin-top: -1vh;">
 		        	<div class="container-fluid d-flex flex-column justify-content-center">
 		        		<label class="form-label text-light fw-bolder">Log in</label>
 
 		        		<label class="form-label text-light fw-bolder">Nome:</label>
 							<input type="text" name="nomelog" class="form-control bg-dark text-light">
 		        		<label class="form-label text-light fw-bolder">Password:</label>
-		        			<input type="text" name="senhalog" class="form-control bg-dark text-light">
+		        			<input type="password" name="senhalog" class="form-control bg-dark text-light" require>
 		        		<input type="submit" class="form-control bg-dark text-light" name="enviar2" value="TO SEND">
 		        	</div>
 		        </form>
@@ -76,10 +76,11 @@
 <?php
 	include('connect.php');
 		if(isset($_POST['enviar1'])){
+			$pos = poss();
 			$sql0 = 'SELECT * FROM user WHERE nome = "'.$_POST['nome'].'"';
 			$res = $con->query($sql0);
 			if($res->num_rows < 1){
-				$sql= 'INSERT INTO user (nome,email,senha,foto,ponto,possicao) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png","0","0")';
+				$sql= 'INSERT INTO user (nome,email,senha,foto,ponto,possicao) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png","0","'.$pos.'")';
 				$resultado = $con->query($sql);
 				if(!$resultado){
 					msg("eror ao cadastrar.");

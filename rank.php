@@ -1,3 +1,8 @@
+<?php
+	include('connect.php');
+	session_start();
+	Proteger();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -34,8 +39,8 @@
 		    	<div class="d-flex flex-column justify-content-center text-center align-items-center p-md-3">
 		    		<h1 class="fw-normal text-light">Your Rank:</h1>
 		    		<div class="collumn container-fluid bg-dark rounded-pill p-md-2 border border-success border-3">
-	        			<h2 class="text-light">User: Paulo</h2>
-	        			<h6 class="text-light">Position: 800</h6>
+	        			<h2 class="text-light">User: <?php echo$_SESSION['name'];?></h2>
+	        			<h6 class="text-light">Position: <?php echo "#".$_SESSION['rank'];?></h6>
 	        		</div>
 	        		<h1 class="fw-normal text-light p-md-3">World Rank:</h1>
 		    	</div>
