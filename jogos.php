@@ -32,7 +32,7 @@
 		    </nav>
 		    <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-dark bg-opacity-50">
 	            <div class="col-md-5 lg-5 mx-auto my-2">
-	                <img src="img/logo.png" class="imglink">
+	                <img src="img/bigchad.png" class="imglink">
 	                <p class="lead fw-normal text-light">
 	                    welcome to the quiz game
 	                </p>

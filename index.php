@@ -35,7 +35,9 @@
 		    </nav>
 		    <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-dark bg-opacity-50">
 	            <div class="col-md-5 p-lg-5 mx-auto my-2">
-	                <img src="img/logo.png" class="imglink">
+	                <img src="img/bigchad.png" class="imglink">
+	                <h1 class="fw-normal text-light">QUIZ PROJECT</h1>
+	                <h2 class="text-light">-Sigma pair-</h2>
 	                <p class="lead fw-normal text-light">
 	                    Start Here
 	                </p>
