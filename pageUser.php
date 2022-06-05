@@ -33,7 +33,7 @@
 		        <div class="container-fluid d-flex justify-content-around">
 		        	<div class="d-flex justify-content-around align-items-center">
 
-						<img <?php $img = $_SESSION['img']; echo ('src="'.$img.'"');?> class="per media-object img-responsive border border-secondary border-3 rounded-pill" onclick="ocultar('imgtr','2')">
+						<img src="<?php echo$_SESSION['img'];?>" class="per media-object img-responsive border border-secondary border-3 rounded-pill" onclick="ocultar('imgtr','2')">
 					</div>
 			        <div class="d-flex">
 			            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -70,8 +70,8 @@
 	            <div class="col-md-5 lg-5 mx-auto my-2">
 	            	<h1 class="fw-normal text-light"><strong>-Ranking-</strong></h1>
 	                <p class="lead fw-normal text-light">
-	                	Position:<br><?php echo "# ".$_SESSION['rank'];?>;<br>
-	                	Punctuation:<br><?php echo $_SESSION['pontos']." Spots";?>;
+	                	Position:<br><?php echo "# ".$_SESSION['rank'];?><br>
+	                	Punctuation:<br><?php echo $_SESSION['pontos']." Spots";?>
 	                </p>
 	            </div>
 	        </div>
@@ -101,19 +101,19 @@
 	if(isset($_POST['env001'])){
 		$cd = $_SESSION['cd'];
 		$img = $_POST['link'];
+		$imgtm = mb_strlen($img);
+		$imgex = $img[($imgtm - 3)].$img[($imgtm - 2)].$img[($imgtm - 1)];
+		if($imgex=="jpg" || $imgex=="png"){
+			$sql = 'UPDATE user SET foto ="'.$img.'" WHERE cd ="'.$cd.'"';
+			$res = $con->query($sql);
 
-		$sql = 'UPDATE user SET foto ="'.$img.'" WHERE cd ="'.$cd.'"';
-		$res = $con->query($sql);
-
-		$sql2 = 'SELECT * FROM user WHERE nome = "'.$_SESSION['name'].'" AND senha ="'.$_SESSION['senha'].'"';
-		$res2 = $con->query($sql2);
-
-		if($res2->num_rows > 0){
+			$sql2 = 'SELECT * FROM user WHERE nome = "'.$_SESSION['name'].'" AND senha ="'.$_SESSION['senha'].'"';
+			$res2 = $con->query($sql2);
 			$user = $res2->fetch_object();
 			$_SESSION['img'] = $user->foto;
-			vai("pageUser.php"); 
+			vai("pageUser.php");
 		}else{
-			msg("foto não aceita");
+			msg("não aceitamos .".$imgex." nesse site");
 		}
 	}
 	if(isset($_POST['enviar'])){

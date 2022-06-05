@@ -34,7 +34,7 @@
 		        </div>
 		    </nav>
 		    <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-dark bg-opacity-50">
-	            <div class="col-md-5 p-lg-5 mx-auto my-2">
+	            <div class="col-md-5 mx-auto my-2">
 	                <img src="img/bigchad.png" class="imglink">
 	                <h1 class="fw-normal text-light">QUIZ PROJECT</h1>
 	                <h2 class="text-light">-Sigma pair-</h2>
@@ -75,35 +75,38 @@
 </html>
 <?php
 	include('connect.php');
-		if(isset($_POST['enviar1'])){
-			$pos = poss();
-			$sql0 = 'SELECT * FROM user WHERE nome = "'.$_POST['nome'].'"';
-			$res = $con->query($sql0);
-			if($res->num_rows < 1){
-				$sql= 'INSERT INTO user (nome,email,senha,foto,ponto,possicao) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png","0","'.$pos.'")';
-				$resultado = $con->query($sql);
-				if(!$resultado){
-					msg("eror ao cadastrar.");
-				}
-			}else{
-				msg("User já existe");
+	if(isset($_POST['enviar1'])){
+		$sql0 = 'SELECT * FROM user WHERE nome = "'.$_POST['nome'].'"';
+		$res = $con->query($sql0);
+		if($res->num_rows < 1){
+			$sql2 = 'SELECT MAX(possicao) AS poss FROM user';
+		    $res2 = $con->query($sql2);
+		    $list = $res2->fetch_object();
+			$pos = fun($list->poss) +1;
+			$sql= 'INSERT INTO user (nome,email,senha,foto,ponto,possicao) VALUES ("'.$_POST['nome'].'","'.$_POST['email']. '","'.$_POST['senha'].'","img/face.png","0","'.$pos.'")';
+			$resultado = $con->query($sql);
+			if(!$resultado){
+				msg("erro ao cadastrar.");
 			}
+		}else{
+			msg("User já existe");
 		}
-		if(isset($_POST['enviar2'])){
-			$sql = 'SELECT * FROM user WHERE nome = "'.$_POST['nomelog'].'" AND senha ="'.$_POST['senhalog'].'"';
-			$res = $con->query($sql);
-			if($res->num_rows > 0){
-				$user = $res->fetch_object();
-				$_SESSION['cd'] = $user->cd;
-				$_SESSION['name'] = $user->nome;
-				$_SESSION['senha'] = $user->senha;
-				$_SESSION['email'] = $user->email;
-				$_SESSION['img'] = $user->foto;
-				$_SESSION['pontos'] = $user->ponto;
-				$_SESSION['rank'] = $user->possicao; 
-				vai('pageUser.php');
-			}else{
-				msg("USER OU SENHA INVALIDO");
-			}
+	}
+	if(isset($_POST['enviar2'])){
+		$sql = 'SELECT * FROM user WHERE nome = "'.$_POST['nomelog'].'" AND senha ="'.$_POST['senhalog'].'"';
+		$res = $con->query($sql);
+		if($res->num_rows > 0){
+			$user = $res->fetch_object();
+			$_SESSION['cd'] = $user->cd;
+			$_SESSION['name'] = $user->nome;
+			$_SESSION['senha'] = $user->senha;
+			$_SESSION['email'] = $user->email;
+			$_SESSION['img'] = $user->foto;
+			$_SESSION['pontos'] = $user->ponto;
+			$_SESSION['rank'] = $user->possicao; 
+			vai('pageUser.php');
+		}else{
+			msg("USER OU SENHA INVALIDO");
 		}
+	}
 ?>

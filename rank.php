@@ -20,6 +20,10 @@
 		<div class="all">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		        <div class="container-fluid d-flex justify-content-around">
+		        	<div class="d-flex justify-content-around align-items-center">
+
+						<img src="<?php echo$_SESSION['img'];?>" class="per media-object img-responsive border border-secondary border-3 rounded-pill">
+					</div>
 			        <div class="d-flex">
 			            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			                <li class="nav-item">
@@ -38,43 +42,65 @@
 		    <div class="container d-flex flex-column justify-content-center">
 		    	<div class="d-flex flex-column justify-content-center text-center align-items-center p-md-3">
 		    		<h1 class="fw-normal text-light">Your Rank:</h1>
-		    		<div class="collumn container-fluid bg-dark rounded-pill p-md-2 border border-success border-3">
-	        			<h2 class="text-light">User: <?php echo$_SESSION['name'];?></h2>
-	        			<h6 class="text-light">Position: <?php echo "#".$_SESSION['rank'];?></h6>
+		    		<div class="collumn container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
+		    			<img src="<?php echo$_SESSION['img'];?>" class="imgrank">
+	        			<h1 class="text-light">User: <?php echo$_SESSION['name'];?></h1>
+	        			<h1 class="text-light">Rank: <?php echo "#".$_SESSION['rank'];?></h1>
 	        		</div>
 	        		<h1 class="fw-normal text-light p-md-3">World Rank:</h1>
 		    	</div>
 		    	<div class="d-flex flex-column overflow-auto" style="height: 50vh;">
-	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-light border-3 text-center">
-	        			<h3 class="text-light">User: Carlos</h3>
-	        			<h6 class="text-light">Position: 1</h6>
-	        		</div><br>
-	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
-	        			<h3 class="text-light">User: Carlos</h3>
-	        			<h6 class="text-light">Position: 1</h6>
-	        		</div><br>
-	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
-	        			<h3 class="text-light">User: Carlos</h3>
-	        			<h6 class="text-light">Position: 1</h6>
-	        		</div><br>
-	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
-	        			<h3 class="text-light">User: Carlos</h3>
-	        			<h6 class="text-light">Position: 1</h6>
-	        		</div><br>
-	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
-	        			<h3 class="text-light">User: Carlos</h3>
-	        			<h6 class="text-light">Position: 1</h6>
-	        		</div><br>
-	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
-	        			<h3 class="text-light">User: Carlos</h3>
-	        			<h6 class="text-light">Position: 1</h6>
-	        		</div><br>
-	        		<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-warning border-3 text-center">
-	        			<h3 class="text-light">User: Carlos</h3>
-	        			<h6 class="text-light">Position: 1</h6>
-	        		</div><br>
+	        		<?php
+	        			$sql ='SELECT * FROM user WHERE possicao=1';
+	        			$res = $con->query($sql);
+		    			$user = $res->fetch_object();
+		    			$nome = $user->nome;
+		    			$foto = $user->foto;
+		    			$poss = $user->possicao;
+		    			$pont = $user->ponto;
+	        			$texto = '<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-primary border-3 text-center">
+	        				<img src="'.$foto.'" class="imgrank">
+		        			<h3 class="text-light">User: '.$nome.'</h3>
+		        			<h3 class="text-light">Rank: #'.$poss.'</h3>
+		        			<h3 class="text-light">Punctuation: '.$pont.'</h3>
+		        		</div>';
+		        		echo($texto);
+	        		?><br>
+	        		<?php
+	        			$sql0 ='SELECT * FROM user';
+	        			$res0 = $con->query($sql0);
+	        			$row = $res0->num_rows + 1;
+	        			$i = 2;
+	        			while($i<$row){ 
+	        				$sql ='SELECT * FROM user WHERE possicao='.$i.'';
+		        			$res = $con->query($sql);
+			    			$user = $res->fetch_object();
+			    			$nome = $user->nome;
+			    			$foto = $user->foto;
+			    			$poss = $user->possicao;
+			    			$pont = $user->ponto;
+			    			$bor = cor($nome);
+		        			$texto = '<div class="container-fluid d-flex flex-row justify-content-around align-items-center bg-dark rounded-pill p-md-2 border border-'.$bor.' border-3 text-center">
+		        				<img src="'.$foto.'" class="imgrank">
+			        			<h3 class="text-light">User: '.$nome.'</h3>
+			        			<h3 class="text-light">Rank: #'.$poss.'</h3>
+			        			<h3 class="text-light">Punctuation: '.$pont.'</h3>
+			        		</div><br>';
+			        		echo($texto);
+			        		$i++;	
+	        			};
+	        		?>
 	        	</div>
 		    </div>
 		</div>
 	</body>
 </html>
+<?php
+	function cor($nm){
+		if($nm == $_SESSION['name']){
+			return "light";
+		}else{
+			return "warning";
+		}
+	}
+?>

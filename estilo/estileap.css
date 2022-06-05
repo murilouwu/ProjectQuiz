@@ -50,3 +50,8 @@
     background: #ffc107;
     border-radius: 6px;
 }
+.imgrank{
+	width: 8%;
+	border-radius: 50px;
+	border: solid 5px rgb(13 16 35 / 70%);
+}
