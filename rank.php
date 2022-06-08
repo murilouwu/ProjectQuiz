@@ -17,7 +17,7 @@
 		<title>Rank</title>
 	</head>
 	<body>
-		<div class="all">
+		<div class="all" style="overflow: hidden;">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		        <div class="container-fluid d-flex justify-content-around">
 		        	<div class="d-flex justify-content-around align-items-center">

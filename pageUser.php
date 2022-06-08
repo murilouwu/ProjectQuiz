@@ -18,7 +18,7 @@
 			echo $_SESSION['name'];
 		?></title>
 	</head>
-	<body>
+	<body style="overflow: hidden;">
 		<div class="all">
 			<div id="2" style="display: none;"></div>
 			<form id="imgtr" class="formimg" method="post">

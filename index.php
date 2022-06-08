@@ -14,7 +14,7 @@
 		<link rel="shortcut icon" href="img/home.png">
 		<title>Main</title>
 	</head>
-	<body>
+	<body style="overflow: hidden;">
 		<div class="all">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		        <div class="container-fluid d-flex justify-content-around">

@@ -16,7 +16,7 @@
 		<link rel="shortcut icon" href="img/logo.png">
 		<title>Make</title>
 	</head>
-	<body>
+	<body style="overflow: hidden;">
 		<div class="all">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		        <div class="container-fluid d-flex justify-content-around">
@@ -45,7 +45,7 @@
 		    <div class="container d-flex flex-column justify-content-center text-center p-md-3">
 		    	<h1 class="fw-normal text-light">Create:</h1>
 		    	<div class="d-flex flex-row justify-content-around text-center align-items-center p-md-3">
-	        		<button type="button" class="btn btn-dark text-warning rounded-pill" style="width: 20vw;" onclick="ocultarA('quiz','categoria','pergunta','alternativa','des')"><strong>Quiz</strong></button>
+	        		<button type="button" class="btn btn-dark text-warning rounded-pill" style="width: 20vw;" onclick="ocultarA('quiz','categoria','pergunta','alternativa')"><strong>Quiz</strong></button>
 	        	</div>
 		    </div>
 		    <div class="container-fluid d-flex justify-content-center margin">
@@ -109,8 +109,11 @@
 						    			$jogo = $res->fetch_object();
 						    			$cd = $jogo->cd;
 						    			$nome = $jogo->nome;
-					        			$texto = '<option value="'.$cd.'">'.$nome.'</option>';
-						        		echo($texto);
+						    			$user = $jogo->id_usuario;
+						    			if($user == $_SESSION['cd']){
+						    				$texto = '<option value="'.$cd.'">'.$nome.'</option>';
+						    				echo($texto);
+						    			}
 						        		$i++;
 				        			};
 				        		?>
@@ -135,14 +138,25 @@
 				        			$row = $res0->num_rows + 1;
 				        			$i = 1;
 				        			while($i<$row){ 
+				        				//peguar pergunta
 				        				$sql ='SELECT * FROM pergunta WHERE cd='.$i.'';
 					        			$res = $con->query($sql);
 						    			$jogo = $res->fetch_object(); 
-							    			$cd = $jogo->cd;
-							    			$nome = $jogo->nome;
-						        			$texto = '<option value="'.$cd.'">'.$nome.'</option>';
-							        		echo($texto);
-							        		$i++;
+						    			$cd = $jogo->cd;
+						    			$nome = $jogo->nome;
+						    			$cdquiz = $jogo->id_jogo;
+						    			//peguar quiz:
+						    			$sql1 ='SELECT * FROM jogo WHERE cd='.$cdquiz.'';
+						    			$res1 = $con->query($sql1);
+						    			$quiz = $res1->fetch_object();
+						    			$nomequiz = $quiz->nome; 
+						    			$user = $quiz->id_usuario;
+										//escrever						    			
+					        			if($user == $_SESSION['cd']){
+						    				$texto = '<option value="'.$cd.'">'.$nome.' do quiz: '.$nomequiz.'</option>';
+						    				echo($texto);
+						    			}
+						        		$i++;
 				        			};
 				        		?>
 		        			</select>
@@ -155,11 +169,12 @@
 		        	</div>
 		        </form>
 	        </div>
-	        <div class="des container flex-column justify-content-center">
+	        <div id="des" class="container flex-column justify-content-center">
 	        	<div class="d-flex flex-column justify-content-center text-center align-items-center p-md-3">
 	        		<h1 class="fw-normal text-light"><b>-YOUR QUIZ-</b></h1>
 	        	</div>
 	        	<?php
+	        		//sql categoria:
 	        		$sql0 ='SELECT * FROM categoria';
         			$res0 = $con->query($sql0);
         			$row = $res0->num_rows + 1;
@@ -170,52 +185,58 @@
 		    			$categoria = $res->fetch_object();
 		    			$cd = $categoria->cd;
 		    			$nome = $categoria->nome;
+		    			//gravar categoria
 	        			$texto = '<div class="d-flex flex-column justify-content-center text-center align-items-center p-md-3">
 			        		<h1 class="fw-normal text-light">quiz about: '.$nome.'</h1>
 			        	</div>';
 		        		echo($texto);
 		        		$i++;
-
+		        		//sql jogo
 		        		$sql2 ='SELECT * FROM jogo';
 	        			$res2 = $con->query($sql2);
 	        			$row2 = $res2->num_rows + 1;
 	        			$i2 = 1;
 	        			while($i2<$row2){
+	        				//peguar jogo
 	        				$sql3 ='SELECT * FROM jogo WHERE cd='.$i2.'';
 		        			$res3 = $con->query($sql3);
 			    			$jogo = $res3->fetch_object();
-			    			$textoA ="";
 		    				$idcat = $jogo->id_categoria;
 			    			$cda = $jogo->cd;
+			    			$user = $jogo->id_usuario;
 			    			$nomea = $jogo->nome;
-
-					    	$sql25 ='SELECT * FROM pergunta';
-		        			$res25 = $con->query($sql25);
-		        			$row25 = $res25->num_rows + 1;
-		        			$i25 = 1;
-		        			$number = 0;
-					    	while($i25<$row25){
-					    		$cod = 'SELECT * FROM pergunta WHERE cd='.$i25.'';
-					    		$ex = $con->query($cod);
-					    		$quest = $ex->fetch_object();
-					    		$idquiz = $quest->id_jogo;
-					    		if ($idquiz==$cda){
-					    			$number = $number + 1;
-					    		}
-					    		$i25++;
-					    	};
-			    			if($idcat==$cd){
-			        			$textoA = $textoA.'<div class="collumn bg-dark text-center rounded-3 p-md-2" style="margin-right: 1vh; width: 15vw;">
-							        			<h2 class="text-light">'.$nomea.'</h2>
-							        			<a class="nav-link text-light linkcss" href="quest.php"><strong>Play</strong></a>
-							        			<h6 class="text-light">category: '.$nome.'</h6>
-							        			<h6 class="text-light">Questions: '.$number.'</h6>
-							        		</div>
-						        		</div>';
-				        		$i2++;
-			        		};
-			        		$a = '<div class="des d-flex flex-row overflow-auto" style="width: 80vw;"><div class="d-flex flex-row">'.$textoA.'</div></div>';
-				        	echo($a);
+			    			
+			    			if($user == $_SESSION['cd']){
+			    				$textoA ="";
+				    			//sql pergunta
+						    	$sql25 ='SELECT * FROM pergunta';
+			        			$res25 = $con->query($sql25);
+			        			$row25 = $res25->num_rows + 1;
+			        			$i25 = 1;
+			        			$number = 0;
+						    	while($i25<$row25){
+						    		$cod = 'SELECT * FROM pergunta WHERE cd='.$i25.'';
+						    		$ex = $con->query($cod);
+						    		$quest = $ex->fetch_object();
+						    		$idquiz = $quest->id_jogo;
+						    		if ($idquiz==$cda){
+						    			$number = $number + 1;
+						    		}
+						    		$i25++;
+						    	};
+				    			if($idcat==$cd){
+				        			$textoA = $textoA.'<div class="collumn bg-dark text-center rounded-3 p-md-2" style="margin-right: 1vh; width: 15vw;">
+								        			<h2 class="text-light">'.$nomea.'</h2>
+								        			<a class="nav-link text-light linkcss" href="quest.php"><strong>Play</strong></a>
+								        			<h6 class="text-light">category: '.$nome.'</h6>
+								        			<h6 class="text-light">Questions: '.$number.'</h6>
+								        		</div>
+							        		</div>';
+				        		};
+				        		$a = '<div class="d-flex flex-row overflow-auto" style="width: 80vw;"><div class="d-flex flex-row">'.$textoA.'</div></div>';
+					        	echo($a);
+			    			}
+			    			$i2++;
 			    		};
         			};
 	        	?>
