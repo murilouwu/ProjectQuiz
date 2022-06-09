@@ -16,8 +16,7 @@
 		<link rel="shortcut icon" href="img/logo.png">
 		<title>Make</title>
 	</head>
-	<body style="overflow: hidden;">
-		<div class="all">
+	<body style="overflow-x: hidden; backdrop-filter: blur(7px);">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		        <div class="container-fluid d-flex justify-content-around">
 		        	<div class="d-flex justify-content-around align-items-center">
@@ -205,6 +204,7 @@
 			    			$cda = $jogo->cd;
 			    			$user = $jogo->id_usuario;
 			    			$nomea = $jogo->nome;
+			    			$img = $jogo->foto;
 			    			
 			    			if($user == $_SESSION['cd']){
 			    				$textoA ="";
@@ -226,6 +226,9 @@
 						    	};
 				    			if($idcat==$cd){
 				        			$textoA = $textoA.'<div class="collumn bg-dark text-center rounded-3 p-md-2" style="margin-right: 1vh; width: 15vw;">
+						        			<div class="uk-card-media-top">
+								                <img src="'.$img.'" width="80vw" height="80vh" alt="">
+								            </div>
 								        			<h2 class="text-light">'.$nomea.'</h2>
 								        			<a class="nav-link text-light linkcss" href="quest.php"><strong>Play</strong></a>
 								        			<h6 class="text-light">category: '.$nome.'</h6>
@@ -241,7 +244,6 @@
         			};
 	        	?>
 	        </div>
-		</div>
 	</body>
 </html>
 <?php
@@ -254,7 +256,7 @@
 		    $list = $res2->fetch_object();
 			$cd = fun($list->poss) +1;
 			$cate = $_POST['select1'];
-			$sql= 'INSERT INTO jogo (cd, nome, id_usuario, id_categoria) VALUES ("'.$cd.'","'.$_POST['nomeQ'].'","'.$_SESSION['cd'].'","'.$cate.'")';
+			$sql= 'INSERT INTO jogo (cd, nome, id_usuario, id_categoria, foto) VALUES ("'.$cd.'","'.$_POST['nomeQ'].'","'.$_SESSION['cd'].'","'.$cate.'","img/conf.png")';
 			$resultado = $con->query($sql);
 			vai('myquiz.php');
 			if(!$resultado){

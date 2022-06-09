@@ -19,12 +19,14 @@ cd INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(450),
 id_usuario INT,
 id_categoria INT,
+foto VARCHAR(100),
 FOREIGN KEY (id_usuario) REFERENCES user(cd),
 FOREIGN KEY (id_categoria) REFERENCES categoria(cd));
 
 CREATE TABLE pergunta(
 cd INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(200),
+foto VARCHAR(100),
 id_jogo INT,
 FOREIGN KEY (id_jogo) REFERENCES jogo(cd));
 
